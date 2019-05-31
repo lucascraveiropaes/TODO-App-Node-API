@@ -22,8 +22,7 @@ npm install
 ```json
 {
     "status": "bool",
-    "message": "string",
-    "todos": "object/array"
+    "message": "string"
 }
 ```
 
@@ -67,13 +66,7 @@ Response example:
 ```json
 {
     "status": true,
-    "message": "Tarefa adicionada com sucesso",
-    "todos": [{
-        "id": 1,
-        "title": "Almoço",
-        "description": "Sair para o almoço ao 12h",
-        "color": "#0ff00f"
-    }]
+    "message": "Tarefa adicionada com sucesso"
 }
 ```
 
@@ -87,13 +80,7 @@ Response example:
 ```json
 {
     "status": true,
-    "message": "Tarefa atualizada com sucesso",
-    "todos": [{
-        "id": 1,
-        "title": "Jantar",
-        "description": "Sair para jantar às 19h",
-        "color": "#000000"
-    }]
+    "message": "Tarefa atualizada com sucesso"
 }
 ```
 
@@ -107,8 +94,7 @@ Response example:
 ```json
 {
     "status": true,
-    "message": "Tarefa deletada com sucesso",
-    "todos": []
+    "message": "Tarefa deletada com sucesso"
 }
 ```
 
