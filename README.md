@@ -10,6 +10,12 @@ Copy the repository link, e and run the following command (with git installed in
 git clone <project-url>
 ```
 
+After downloaded the project, run the following command to download all dependencies from the project
+
+```bash
+npm install
+```
+
 ## Routes
 
 * General responses for routes:
