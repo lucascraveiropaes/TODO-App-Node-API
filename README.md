@@ -33,10 +33,34 @@ npm install
 GET /todos
 ```
 
+Response example:
+```json
+{
+    "status": true,
+    "message": "Dados recuperados com sucesso",
+    "todos": [{
+        "id": 1,
+        "title": "Almoço",
+        "description": "Sair para o almoço ao 12h",
+        "color": "#0ff00f"
+    }]
+}
+```
+
 * Route to insert new todo
 
 ```http
 POST /todos/new
+```
+
+Body request example:
+
+```json
+{
+	"title": "Almoço",
+	"description": "Sair para o almoço ao 12h",
+	"color": "#0ff00f"
+}
 ```
 
 Response example:
