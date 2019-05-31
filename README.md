@@ -15,9 +15,9 @@ git clone <project-url>
 * General responses for routes:
 ```json
 {
-    status: bool,
-    message: string,
-    todos: object/array
+    "status": "bool",
+    "message": "string",
+    "todos": "object/array"
 }
 ```
 
@@ -36,13 +36,13 @@ POST /todos/new
 Response example:
 ```json
 {
-    status: true,
-    message: "Tarefa adicionada com sucesso",
-    todos: [{
-        id: 1,
-        title: "Almoço",
-        description: "Sair para o almoço ao 12h",
-        color: "#0ff00f"
+    "status": true,
+    "message": "Tarefa adicionada com sucesso",
+    "todos": [{
+        "id": 1,
+        "title": "Almoço",
+        "description": "Sair para o almoço ao 12h",
+        "color": "#0ff00f"
     }]
 }
 ```
@@ -56,13 +56,13 @@ PUT /todos/update/:id
 Response example:
 ```json
 {
-    status: true,
-    message: "Tarefa atualizada com sucesso",
-    todos: [{
-        id: 1,
-        title: "Jantar",
-        description: "Sair para jantar às 19h",
-        color: "#000000"
+    "status": true,
+    "message": "Tarefa atualizada com sucesso",
+    "todos": [{
+        "id": 1,
+        "title": "Jantar",
+        "description": "Sair para jantar às 19h",
+        "color": "#000000"
     }]
 }
 ```
@@ -76,9 +76,9 @@ DELETE /todos/delete/:id
 Response example:
 ```json
 {
-    status: true,
-    message: "Tarefa deletada com sucesso",
-    todos: []
+    "status": true,
+    "message": "Tarefa deletada com sucesso",
+    "todos": []
 }
 ```
 
