@@ -31,8 +31,8 @@ class TodosController {
 
             if (todoValidation !== true) {
                 response.message = todoValidation;
-            } else if (!req.body.color) {
-                data.color = "#FFF";
+            } else if (!req.body.backgroundColor) {
+                data.backgroundColor = "#FFF";
                 response.status = true;
             } else {
                 response.status = true;
@@ -67,7 +67,7 @@ class TodosController {
                 message: "Tarefa não encontrada"
             }
 
-            if (!data.title && !data.description && !data.color) {
+            if (!data.title && !data.description && !data.backgroundColor) {
                 response.message = "Objeto inválido";
             } else {
                 response.status = true;

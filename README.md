@@ -66,7 +66,8 @@ Response example:
 ```json
 {
     "status": true,
-    "message": "Tarefa adicionada com sucesso"
+    "message": "Tarefa adicionada com sucesso",
+    "todo_new_id": 1
 }
 ```
 

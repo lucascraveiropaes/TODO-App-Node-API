@@ -1,4 +1,5 @@
 import express      from "express";
+import cors         from "cors";
 import bodyParser   from "body-parser";
 import todos        from "./src/routes/todos";
 
@@ -7,6 +8,7 @@ const PORT = 5000;
 
 app.use( bodyParser.json() );
 app.use( bodyParser.urlencoded({ extended: false }) );
+app.use( cors() );
 
 app.use( todos );
 
