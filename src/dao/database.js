@@ -1,8 +1,14 @@
-const todos =  [{
-    id: 1,
-    title: "lunch",
-    description: "Go for lunc by 2pm",
-    color: "#000"
-}];
+import mysql from "mysql";
 
-export default todos;
+const conn = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "",
+    database: "todo_app"
+});
+
+conn.connect((err) => {
+    if (err) throw err;
+});
+
+export default conn;

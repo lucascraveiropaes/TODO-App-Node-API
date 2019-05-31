@@ -1,12 +1,22 @@
-import todos from "../dao/database";
+import TodoDAO          from "../dao/todoDAO";
+import { validateTodo } from "../helpers/utils";
 
 class TodosController {
     getTodos(req, res) {
-        return res.status(200).send({
-            status: true,
-            message: "Dados recuperados com sucesso",
-            todos: todos
-        });
+        TodoDAO.list((todos) => {
+            if (todos === false) {
+                return res.status(500).send({
+                    status: false,
+                    message: "Erro no servidor"
+                });
+            }
+
+            res.status(200).send({
+                status: true,
+                message: "Dados recuperados com sucesso",
+                todos: todos
+            });
+        })
     }
 
     addTodo(req, res) {
@@ -32,13 +42,16 @@ class TodosController {
                 return res.status(400).send(response);
             }
 
-            data.id = todos.length + 1;
-            todos.push(data);
+            TodoDAO.insert(data, (status) => {
+                if (status !== false) {
+                    response.message = "Tarefa adicionada com sucesso";
+                    response.todo_new_id = status.insertId;
+                    return res.status(200).send(response);
+                }
 
-            response.message = "Tarefa adicionada com sucesso";
-            response.todos = todos;
-
-            return res.status(200).send(response);
+                response.status = false;
+                return res.status(500).send(response);
+            });
         } catch (e) {
             console.log(e);
             return res.status(500);
@@ -48,32 +61,31 @@ class TodosController {
     updateTodo(req, res) {
         try {
             const id = parseInt(req.params.id);
-            const index = todos.findIndex(todo => todo.id === id);
-            let todo = req.body;
+            let data = req.body;
             let response = {
                 status: false,
                 message: "Tarefa não encontrada"
             }
 
-            if (index < -1)
-                return res.status(400).send(response);
-
-            if (!todo.title && !todo.description && !todo.color) {
+            if (!data.title && !data.description && !data.color) {
                 response.message = "Objeto inválido";
             } else {
                 response.status = true;
+                data.id = id;
             }
 
             if (response.status === false)
                 return res.status(400).send(response);
 
-            todo = Object.assign(todos[index], todo);
+            TodoDAO.update(data, (status) => {
+                if (status !== false && status.affectedRows > 0) {
+                    response.message = "Tarefa atualizada com sucesso";
+                    return res.status(200).send(response);
+                }
 
-            todos[index] = todo;
-            response.message = "Tarefa atualizada com sucesso";
-            response.todos = todos;
-
-            return res.status(200).send(response);
+                response.status = false;
+                return res.status(500).send(response);
+            });
         } catch (e) {
             console.log(e);
             return res.status(500);
@@ -83,24 +95,21 @@ class TodosController {
     deleteTodo(req, res) {
         try {
             const id = parseInt(req.params.id);
-            const newTodos = todos.filter(todo => todo.id !== id);
-            let status = 500;
+            let statusCode = 500;
             let response = {
                 status: false,
-                message: "Tarefa não encontrada"
+                message: "Não foi possível deletar tarefa"
             }
 
-            if (newTodos.length >= todos.length) {
-                status = 400;
-                response.message = "Não foi possível deletar tarefa";
-            } else {
-                status = 200;
-                response.status = true;
-                response.message = "Tarefa deletada com sucesso";
-                response.todos = newTodos;
-            }
+            TodoDAO.delete(id, (status) => {
+                if (status !== false && status.affectedRows > 0) {
+                    response.message = "Tarefa deletada com sucesso";
+                    response.status = true;
+                    statusCode = 200;
+                }
 
-            return res.status(status).send(response);
+                return res.status(statusCode).send(response);
+            });
         } catch (e) {
             console.log(e);
             return res.status(500);

@@ -57,9 +57,9 @@ Body request example:
 
 ```json
 {
-	"title": "Almoço",
-	"description": "Sair para o almoço ao 12h",
-	"color": "#0ff00f"
+    "title": "Almoço",
+    "description": "Sair para o almoço ao 12h",
+    "color": "#0ff00f"
 }
 ```
 
